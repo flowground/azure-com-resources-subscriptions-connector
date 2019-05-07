@@ -1,0 +1,135 @@
+{
+    "title": "SubscriptionClient",
+    "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/resources-subscriptions/2016-06-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available Microsoft.Resources REST API operations.",
+            "description": "Lists all of the available Microsoft.Resources REST API operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Subscriptions_List": {
+            "main": "./lib/actions/Subscriptions_List.js",
+            "title": "Gets all subscriptions for a tenant.",
+            "description": "Gets all subscriptions for a tenant.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Subscriptions_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Subscriptions_Get": {
+            "main": "./lib/actions/Subscriptions_Get.js",
+            "title": "Gets details about a specified subscription.",
+            "description": "Gets details about a specified subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Subscriptions_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Subscriptions_ListLocations": {
+            "main": "./lib/actions/Subscriptions_ListLocations.js",
+            "title": "Gets all available geo-locations.",
+            "description": "This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Subscriptions_ListLocations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Tenants_List": {
+            "main": "./lib/actions/Tenants_List.js",
+            "title": "Gets the tenants for your account.",
+            "description": "Gets the tenants for your account.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Tenants_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
